@@ -1,5 +1,5 @@
 //C program that converts infix expressions to postfix expressions:
-
+// this is without using structure
 #include <stdio.h>
 #define MAX_SIZE 100
 
