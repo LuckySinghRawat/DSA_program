@@ -1,57 +1,55 @@
+// THIS CODE IS OF STRUCTURED STACK
+
 #include <stdio.h>
 #include <stdlib.h>
-#define cap 10
+#define CAP 10
+
 typedef struct stack
 {
     int top;
-    int array[cap];
+    int arr[CAP];
 } stk;
-void create(stk *stack)
+
+void create(stk *s)
 {
-    stack->top = -1;
+    s->top = -1;
 }
 
-int isEmpty(stk *stack)
+int isEmpty(stk *s)
 {
-    return stack->top == -1;
+    return s->top == -1;
 }
-void push(stk *stack, int k)
+
+void push(stk *s, int k)
 {
-    if (stack->top == cap - 1)
+    s->arr[++s->top] = k;
+}
+void pop(stk *s)
+{
+    if (isEmpty(s))
     {
-        printf("Stack over flow");
+        printf("Stack is underFlow can't pop...\n");
         return;
     }
-    stack->array[++stack->top] = k;
-    printf("Pushed element is %d \n", k);
+    printf("Poped Element is %d\n", s->arr[s->top--]);
+}
+void size(stk *s)
+{
+    printf("Size of stack is %d\n", s->top + 1);
 }
 
-int pop(stk *stack)
+void display(stk *s)
 {
-    if (isEmpty(stack))
+    if (isEmpty(s))
     {
-        printf("Stack underflow!..cant push");
-        return -1;
-    }
-    return stack->array[stack->top--];
-}
-
-int size(stk *stack)
-{
-    return stack->top + 1;
-}
-
-void Print(stk *stack)
-{
-    if (isEmpty(stack))
-    {
-        printf("Stack is empty");
+        printf("Stack is empty\n");
         return;
     }
-    printf("Stack's Elemets are :");
-    for (int i = stack->top; i >= 0; i--)
+    int i = 0;
+    printf("Elements in stack are : ");
+    while (i != s->top + 1)
     {
-        printf("%d  ", stack->array[i]);
+        printf("%d\t", s->arr[i++]);
     }
     printf("\n");
 }
@@ -60,38 +58,37 @@ int main()
 {
     stk stack;
     create(&stack);
-    int value, choice;
     while (1)
     {
-        printf("Choose the number for operation\npush--> 1 || pop--> 2 || size--> 3 || print--> 4 || exit--> 5\n");
+        int choice, value;
+        printf("Enter 1->push : 2->pop : 3->size : 4->display : 5->Exit\n\t:: ");
         scanf("%d", &choice);
-
         switch (choice)
         {
         case 1:
-            printf("Enter the number to push:  ");
+            if (stack.top == CAP - 1)
+            {
+                printf("Stack overFlow can't push ....\n");
+                break;
+            }
+            printf("Enter value to push in stack :: ");
             scanf("%d", &value);
             push(&stack, value);
             break;
         case 2:
-            value = pop(&stack);
-            if (value != -1)
-            {
-                printf("Poped value is %d\n", value);
-            }
-
+            pop(&stack);
             break;
+
         case 3:
-            printf("Current size of stack: %d\n", size(&stack));
+            size(&stack);
             break;
         case 4:
-            Print(&stack);
+            display(&stack);
             break;
         case 5:
             exit(0);
-
         default:
-            printf("Invalid choice !!! try again\n");
+            printf("Enter valid choice...\n");
             break;
         }
     }
