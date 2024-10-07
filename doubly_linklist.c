@@ -66,19 +66,29 @@ int main()
         case 0:
             exit(0);
             break;
-        
+
         case 2:
             head = create(head);
             n *ptr = head;
             break;
 
-        case 1:
-            ptr = ptr->prev;
-            printf("%d", ptr->data);
-            break;
         case 3:
             printf("%d", ptr->data);
             ptr = ptr->next;
+            int x = ptr->data;
+            break;
+
+        case 1:
+            if (ptr->data == x)
+            {
+                ptr = ptr->prev->prev;
+                printf("%d", ptr->data);
+            }
+            else
+            {
+                ptr = ptr->prev;
+                printf("%d", ptr->data);
+            }
             break;
         case 4:
             display(head);
