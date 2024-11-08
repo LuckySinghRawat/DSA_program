@@ -131,27 +131,54 @@ void middleNode(struct node *ptr)
     {
         if (size(head) > 2)
         {
-            while (ptr != NULL)
+            struct node *temp = head, *temp1 = head;
+
+            while (temp!=NULL && temp->next!=NULL)
             {
-                match++;
-                if (match == count)
+                temp = temp->next->next;
+                if (temp != NULL)
                 {
-                    break;
+                temp1 = temp1->next;
                 }
-                else
-                {
-                    ptr = ptr->next;
-                }
-            }
-            if (size(head) % 2 == 0)
+
+            
+                // while ( temp->next != NULL && temp->next->next != NULL)// only for one middle node
+                // {
+                //     temp = temp->next->next;
+                //     temp1 = temp1->next;
+                // }
+            if (temp == NULL)
             {
-                printf("The Middle Nodes are : %d\t%d\n", ptr->data, ptr->next->data);
+                printf("%d AND %d are the middle element\n", temp1->data, temp1->next->data);
             }
             else
             {
-                printf("The Middle Node is : %d\n", ptr->next->data);
+                printf("%d is the middle element\n", temp1->data);
             }
-        }else{
+
+            // while (ptr != NULL)
+            // {
+            //     match++;
+            //     if (match == count)
+            //     {
+            //         break;
+            //     }
+            //     else
+            //     {
+            //         ptr = ptr->next;
+            //     }
+            // }
+            // if (size(head) % 2 == 0)
+            // {
+            //     printf("The Middle Nodes are : %d\t%d\n", ptr->data, ptr->next->data);
+            // }
+            // else
+            // {
+            //     printf("The Middle Node is : %d\n", ptr->next->data);
+            // }
+        }
+        else
+        {
             printf("There is no MiddleElement....\n");
         }
     }
